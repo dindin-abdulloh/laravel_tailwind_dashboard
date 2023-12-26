@@ -158,6 +158,27 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 37,
                 'title' => 'categories_edit',
             ],
+            // suppliers
+            [
+                'id'    => 38,
+                'title' => 'suppliers_access',
+            ],
+            [
+                'id'    => 39,
+                'title' => 'suppliers_create',
+            ],
+            [
+                'id'    => 40,
+                'title' => 'suppliers_delete',
+            ],
+            [
+                'id'    => 41,
+                'title' => 'suppliers_show',
+            ],
+            [
+                'id'    => 42,
+                'title' => 'suppliers_edit',
+            ],
         ];
 
         Permission::insert($permissions);

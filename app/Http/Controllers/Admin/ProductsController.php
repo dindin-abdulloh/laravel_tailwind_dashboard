@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Gate;
-use App\Products;
+use App\Product;
 use App\User;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,7 +16,7 @@ class ProductsController extends Controller
     {
         abort_if(Gate::denies('products_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $products = Products::all();
+        $products = Product::all();
 
         return view('admin.products.index', compact('products'));
     }

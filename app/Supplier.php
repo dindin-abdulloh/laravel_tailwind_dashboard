@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use \DateTimeInterface;
 
-class Products extends Model
+class Supplier extends Model
 {
-    use SoftDeletes;
-
-    public $table = 'products';
+    public $table = 'suppliers';
 
     protected $dates = [
         'created_at',
@@ -19,7 +17,9 @@ class Products extends Model
     ];
 
     protected $fillable = [
-        'name',
+        'supplier_name',
+        'supplier_address',
+        'supplier_telp',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -28,10 +28,5 @@ class Products extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class);
     }
 }

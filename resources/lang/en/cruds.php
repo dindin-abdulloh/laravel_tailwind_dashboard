@@ -137,4 +137,22 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
+
+    'supplier'         => [
+        'title'          => 'Suppliers',
+        'title_singular' => 'Suppliers',
+        'fields'         => [
+            'id'                => 'ID',
+            'supplier_name'     => 'Nama Supplier',
+            'supplier_address'  => 'Alamat Supplier',
+            'supplier_telp'     => 'Telpon Supplier',
+            'name_helper'       => '',
+            'created_at'        => 'Created at',
+            'created_at_helper' => '',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => '',
+            'deleted_at'        => 'Deleted at',
+            'deleted_at_helper' => '',
+        ],
+    ],
 ];
