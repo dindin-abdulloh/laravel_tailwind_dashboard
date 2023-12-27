@@ -38,7 +38,7 @@ class CategoryController extends Controller
         $project = Category::create($request->all());
         // $project->users()->sync($request->input('users', []));
 
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.categories.index');
     }
 
     public function show(Category $category)

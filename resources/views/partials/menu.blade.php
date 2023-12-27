@@ -15,6 +15,63 @@
             <span class="mx-4">Dashboard</span>
         </a>
 
+
+        {{-- @can('project_access')
+            <a class="nav-link{{ request()->is('admin/projects*') ? ' active' : '' }}" href="{{ route('admin.projects.index') }}">
+                <i class="fa-fw fas fa-project-diagram">
+
+                </i>
+
+                <span class="mx-4">{{ trans('cruds.project.title') }}</span>
+            </a>
+        @endcan --}}
+        {{-- @can('folder_access')
+            <a class="nav-link{{ request()->is('admin/folders*') ? ' active' : '' }}" href="{{ route('admin.folders.index') }}">
+                <i class="fa-fw fas fa-folder">
+
+                </i>
+
+                <span class="mx-4">{{ trans('cruds.folder.title') }}</span>
+            </a>
+        @endcan --}}
+        @can('sales_access')
+            <a class="nav-link{{ request()->is('admin/sales*') ? ' active' : '' }}" href="{{ route('admin.sales.index') }}">
+                <i class="fa fa-money" aria-hidden="true"></i>
+
+                <span class="mx-4">{{ trans('cruds.sale.title') }}</span>
+            </a>
+        @endcan
+        @can('categories_access')
+            <a class="nav-link{{ request()->is('admin/categories*') ? ' active' : '' }}" href="{{ route('admin.categories.index') }}">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+
+                <span class="mx-4">{{ trans('cruds.category.title') }}</span>
+            </a>
+        @endcan
+        @can('suppliers_access')
+            <a class="nav-link{{ request()->is('admin/suppliers*') ? ' active' : '' }}" href="{{ route('admin.suppliers.index') }}">
+                <i class="fa fa-truck" aria-hidden="true"></i>
+
+                <span class="mx-4">{{ trans('cruds.supplier.title') }}</span>
+            </a>
+        @endcan
+        @can('products_access')
+            <a class="nav-link{{ request()->is('admin/products*') ? ' active' : '' }}" href="{{ route('admin.products.index') }}">
+
+                <i class="fa fa-medkit" aria-hidden="true"></i>
+
+                <span class="mx-4">{{ trans('cruds.product.title') }}</span>
+            </a>
+        @endcan
+        @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
+            <a class="nav-link{{ request()->is('profile/password') ? ' active' : '' }}" href="{{ route('profile.password.edit') }}">
+                <i class="fa-fw fas fa-key">
+
+                </i>
+
+                <span class="mx-4">{{ trans('global.change_password') }}</span>
+            </a>
+        @endif
         @can('user_management_access')
             <div class="nav-dropdown">
                 <a class="nav-link" href="#">
@@ -56,55 +113,6 @@
                 </div>
             </div>
         @endcan
-        @can('project_access')
-            <a class="nav-link{{ request()->is('admin/projects*') ? ' active' : '' }}" href="{{ route('admin.projects.index') }}">
-                <i class="fa-fw fas fa-project-diagram">
-
-                </i>
-
-                <span class="mx-4">{{ trans('cruds.project.title') }}</span>
-            </a>
-        @endcan
-        @can('folder_access')
-            <a class="nav-link{{ request()->is('admin/folders*') ? ' active' : '' }}" href="{{ route('admin.folders.index') }}">
-                <i class="fa-fw fas fa-folder">
-
-                </i>
-
-                <span class="mx-4">{{ trans('cruds.folder.title') }}</span>
-            </a>
-        @endcan
-        @can('categories_access')
-            <a class="nav-link{{ request()->is('admin/categories*') ? ' active' : '' }}" href="{{ route('admin.categories.index') }}">
-                <i class="fa fa-bars" aria-hidden="true"></i>
-
-                <span class="mx-4">{{ trans('cruds.category.title') }}</span>
-            </a>
-        @endcan
-        @can('suppliers_access')
-            <a class="nav-link{{ request()->is('admin/suppliers*') ? ' active' : '' }}" href="{{ route('admin.suppliers.index') }}">
-                <i class="fa fa-truck" aria-hidden="true"></i>
-
-                <span class="mx-4">{{ trans('cruds.supplier.title') }}</span>
-            </a>
-        @endcan
-        @can('products_access')
-            <a class="nav-link{{ request()->is('admin/products*') ? ' active' : '' }}" href="{{ route('admin.products.index') }}">
-
-                <i class="fa fa-medkit" aria-hidden="true"></i>
-
-                <span class="mx-4">{{ trans('cruds.product.title') }}</span>
-            </a>
-        @endcan
-        @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
-            <a class="nav-link{{ request()->is('profile/password') ? ' active' : '' }}" href="{{ route('profile.password.edit') }}">
-                <i class="fa-fw fas fa-key">
-
-                </i>
-
-                <span class="mx-4">{{ trans('global.change_password') }}</span>
-            </a>
-        @endif
         <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
             <i class="fa-fw fas fa-sign-out-alt">
 

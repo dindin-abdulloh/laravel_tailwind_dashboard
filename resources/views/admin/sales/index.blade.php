@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 @section('content')
-@can('products_create')
+@can('sales_create')
     <div class="block my-4">
-        <a class="btn-md btn-green" href="{{ route('admin.products.create') }}">
-            {{ trans('global.add') }} {{ trans('cruds.product.title_singular') }}
+        <a class="btn-md btn-green" href="{{ route('admin.sales.create') }}">
+            {{ trans('global.add') }} {{ trans('cruds.sale.title_singular') }}
         </a>
     </div>
 @endcan
 <div class="main-card">
     <div class="header">
-        {{ trans('cruds.product.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.sale.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="body">
@@ -21,22 +21,25 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.product.fields.id') }}
+                            {{ trans('cruds.sale.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.product.fields.product_name') }}
+                            {{ trans('cruds.sale.fields.product_id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.product.fields.price') }}
+                            {{ trans('cruds.sale.fields.sale_date') }}
                         </th>
                         <th>
-                            {{ trans('cruds.product.fields.stock_quantity') }}
+                            {{ trans('cruds.sale.fields.quantity') }}
                         </th>
                         <th>
-                            {{ trans('cruds.product.fields.category') }}
+                            {{ trans('cruds.sale.fields.unit_price') }}
                         </th>
                         <th>
-                            {{ trans('cruds.product.fields.supplier') }}
+                            {{ trans('cruds.sale.fields.total_amount') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.sale.fields.user_id') }}
                         </th>
                         <th>
                             &nbsp;
@@ -44,44 +47,47 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($products as $key => $product)
-                        <tr data-entry-id="{{ $product->id }}">
+                    @foreach($sales as $key => $sale)
+                        <tr data-entry-id="{{ $sale->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $product->id ?? '' }}
+                                {{ $sale->id ?? '' }}
                             </td>
                             <td>
-                                {{ $product->product_name ?? '' }}
+                                {{ $sale->product->product_name ?? '' }}
                             </td>
                             <td>
-                                {{ $product->price ?? '' }}
+                                {{ $sale->sale_date ?? '' }}
                             </td>
                             <td>
-                                {{ $product->stock_quantity ?? '' }}
+                                {{ $sale->quantity ?? '' }}
                             </td>
                             <td>
-                                {{ $product->category->category_name ?? '' }}
+                                {{ $sale->unit_price ?? '' }}
                             </td>
                             <td>
-                                {{ $product->supplier->supplier_name ?? '' }}
+                                {{ $sale->total_amount ?? '' }}
                             </td>
                             <td>
-                                @can('products_show')
-                                    <a class="btn-sm btn-indigo" href="{{ route('admin.products.show', $product->id) }}">
+                                {{ $sale->user->name ?? '' }}
+                            </td>
+                            <td>
+                                @can('sales_show')
+                                    <a class="btn-sm btn-indigo" href="{{ route('admin.sales.show', $sale->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('products_edit')
-                                    <a class="btn-sm btn-blue" href="{{ route('admin.products.edit', $product->id) }}">
+                                @can('sales_edit')
+                                    <a class="btn-sm btn-blue" href="{{ route('admin.sales.edit', $sale->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('products_delete')
-                                    <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('sales_delete')
+                                    <form action="{{ route('admin.sales.destroy', $sale->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn-sm btn-red" value="{{ trans('global.delete') }}">
