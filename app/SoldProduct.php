@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use \DateTimeInterface;
 
-class Product extends Model
+class SoldProduct extends Model
 {
     use SoftDeletes;
 
-    public $table = 'products';
+    public $table = 'sold_products';
 
     protected $dates = [
         'created_at',
@@ -19,15 +19,12 @@ class Product extends Model
     ];
 
     protected $fillable = [
-        'product_name',
-        'product_code',
-        'expired_date',
-        'category_id',
-        'supplier_id',
-        'price',
-        'purchase_price',
-        'stock_quantity',
-        'created_at',
+        'sale_id',
+        'product_id',
+        'quantity',
+        'unit_price',
+        'discount',
+        'total_amount',
         'updated_at',
         'deleted_at',
     ];
@@ -37,17 +34,13 @@ class Product extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-
-
-    public function supplier()
+    public function product()
     {
-        return $this->belongsTo(Supplier::class, 'supplier_id');
+        return $this->belongsToMany(Product::class);
     }
 
-    public function category()
+    public function sale()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsToMany(Sale::class);
     }
-
-
 }

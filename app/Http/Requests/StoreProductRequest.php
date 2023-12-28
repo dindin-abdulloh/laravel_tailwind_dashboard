@@ -23,6 +23,10 @@ class StoreProductRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'product_code'       => [
+                // 'string',
+                'required',
+            ],
             'category_id' => [
                 'required',
                 'integer',
@@ -33,11 +37,19 @@ class StoreProductRequest extends FormRequest
             ],
             'price' => [
                 'required',
-                'integer',
+                // 'integer',
+            ],
+            'purchase_price' => [
+                'required',
+                // 'integer',
             ],
             'stock_quantity' => [
                 'required',
                 'integer',
+            ],
+            'expired_date' => [
+                'required',
+                // 'integer',
             ],
         ];
     }

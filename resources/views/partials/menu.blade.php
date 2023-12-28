@@ -48,6 +48,13 @@
                 <span class="mx-4">{{ trans('cruds.category.title') }}</span>
             </a>
         @endcan
+        @can('units_access')
+            <a class="nav-link{{ request()->is('admin/units*') ? ' active' : '' }}" href="{{ route('admin.units.index') }}">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+
+                <span class="mx-4">{{ trans('cruds.unit.title') }}</span>
+            </a>
+        @endcan
         @can('suppliers_access')
             <a class="nav-link{{ request()->is('admin/suppliers*') ? ' active' : '' }}" href="{{ route('admin.suppliers.index') }}">
                 <i class="fa fa-truck" aria-hidden="true"></i>

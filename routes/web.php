@@ -46,6 +46,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('sales/destroy', 'SaleController@massDestroy')->name('sales.massDestroy');
     Route::resource('sales', 'SaleController');
 
+    // units
+    Route::delete('units/destroy', 'UnitController@massDestroy')->name('units.massDestroy');
+    Route::resource('units', 'UnitController');
+
     // Folders
     Route::delete('folders/destroy', 'FoldersController@massDestroy')->name('folders.massDestroy');
     Route::post('folders/media', 'FoldersController@storeMedia')->name('folders.storeMedia');

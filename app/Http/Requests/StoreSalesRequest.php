@@ -20,10 +20,7 @@ class StoreSalesRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id'       => [
-                'integer',
-                'required',
-            ],
+
             'user_id' => [
                 'required',
                 'integer',
@@ -32,18 +29,27 @@ class StoreSalesRequest extends FormRequest
                 'required',
                 'string',
             ],
-            'quantity' => [
-                'required',
-                'integer',
-            ],
-            'unit_price' => [
+            'transaction_code' => [
                 'required',
                 'string',
             ],
-            'total_amount' => [
+            'change_due' => [
                 'required',
-                'integer',
+                // 'string',
             ],
+            'amount_paid' => [
+                'required',
+                // 'string',
+            ],
+            'grand_total' => [
+                'required',
+                // 'string',
+            ],
+            'sold_product' => [
+                'required',
+                // 'string',
+            ],
+
         ];
     }
 }

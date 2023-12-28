@@ -19,12 +19,13 @@ class Sale extends Model
     ];
 
     protected $fillable = [
-        'product_id',
+        // 'product_id',
         'user_id',
+        'grand_total',
         'sale_date',
-        'quantity',
-        'unit_price',
-        'total_amount',
+        'transaction_code',
+        'change_due',
+        'amount_paid',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -35,14 +36,16 @@ class Sale extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'product_id');
-    }
+
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function soldProducts()
+    {
+        return $this->hasMany(SoldProduct::class);
     }
 
 }

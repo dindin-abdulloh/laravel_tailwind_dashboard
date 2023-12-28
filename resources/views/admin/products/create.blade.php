@@ -20,24 +20,35 @@
                     <span class="block">{{ trans('cruds.product.fields.name_helper') }}</span>
                 </div>
 
-                <div class="mb-3 mx-2">
-                    <label for="price" class="text-xs required">{{ trans('cruds.product.fields.price') }}</label>
+                <div class="mt-3 mx-2">
+                    <label for="purchase_price" class="text-xs required">{{ trans('cruds.product.fields.purchase_price') }}</label>
                     <div class="form-group">
-                        <input type="number" id="price" name="price" class="{{ $errors->has('price') ? ' is-invalid' : '' }}" value="{{ old('price') }}" required>
+                        <input type="number" id="purchase_price" name="purchase_price" class="{{ $errors->has('purchase_price') ? ' is-invalid' : '' }}" value="{{ old('purchase_price') }}" required>
                     </div>
-                    @if($errors->has('price'))
-                        <p class="invalid-feedback">{{ $errors->first('price') }}</p>
+                    @if($errors->has('purchase_price'))
+                        <p class="invalid-feedback">{{ $errors->first('purchase_price') }}</p>
                     @endif
                     <span class="block">{{ trans('cruds.product.fields.name_helper') }}</span>
                 </div>
 
-                <div class="mb-3 mx-2">
+                <div class="mt-3 mx-2">
                     <label for="stock_quantity" class="text-xs required">{{ trans('cruds.product.fields.stock_quantity') }}</label>
                     <div class="form-group">
                         <input type="number" id="stock_quantity" name="stock_quantity" class="{{ $errors->has('stock_quantity') ? ' is-invalid' : '' }}" value="{{ old('stock_quantity') }}" required>
                     </div>
                     @if($errors->has('stock_quantity'))
                         <p class="invalid-feedback">{{ $errors->first('stock_quantity') }}</p>
+                    @endif
+                    <span class="block">{{ trans('cruds.product.fields.name_helper') }}</span>
+                </div>
+
+                <div class="mt-3 mx-2">
+                    <label for="product_code" class="text-xs required">{{ trans('cruds.product.fields.product_code') }}</label>
+                    <div class="form-group">
+                        <input type="text" id="product_code" name="product_code" class="{{ $errors->has('product_code') ? ' is-invalid' : '' }}" value="{{ old('product_code') }}" required>
+                    </div>
+                    @if($errors->has('product_code'))
+                        <p class="invalid-feedback">{{ $errors->first('product_code') }}</p>
                     @endif
                     <span class="block">{{ trans('cruds.product.fields.name_helper') }}</span>
                 </div>
@@ -58,6 +69,17 @@
                 </div>
 
                 <div class="mt-3 mx-2">
+                    <label for="price" class="text-xs required">{{ trans('cruds.product.fields.price') }}</label>
+                    <div class="form-group">
+                        <input type="number" id="price" name="price" class="{{ $errors->has('price') ? ' is-invalid' : '' }}" value="{{ old('price') }}" required>
+                    </div>
+                    @if($errors->has('price'))
+                        <p class="invalid-feedback">{{ $errors->first('price') }}</p>
+                    @endif
+                    <span class="block">{{ trans('cruds.product.fields.name_helper') }}</span>
+                </div>
+
+                <div class="mt-3 mx-2">
                     <label for="supplier_id" class="text-xs">{{ trans('cruds.product.fields.supplier') }}</label>
                     <select class="select2{{ $errors->has('supplier_id') ? ' is-invalid' : '' }}" name="supplier_id" id="supplier_id" multiple>
                         @foreach($supplier as $id => $sup)
@@ -69,6 +91,16 @@
                     @endif
                     <span class="block">{{ trans('cruds.product.fields.name_helper') }}</span>
                 </div>
+                <div class="mt-3 mx-2">
+                    <label for="expired_date" class="text-xs required">{{ trans('cruds.product.fields.expired_date') }}</label>
+                    <div class="form-group">
+                        <input type="date" id="expired_date" name="expired_date" class="{{ $errors->has('expired_date') ? ' is-invalid' : '' }}" value="{{ old('expired_date') }}" required>
+                    </div>
+                    @if($errors->has('expired_date'))
+                        <p class="invalid-feedback">{{ $errors->first('expired_date') }}</p>
+                    @endif
+                    <span class="block">{{ trans('cruds.product.fields.name_helper') }}</span>
+                </div>
             </div>
         </div>
 
@@ -77,4 +109,48 @@
         </div>
     </form>
 </div>
+@endsection
+
+@section('scripts')
+    @parent
+    <script>
+         $(document).ready(function () {
+            var $purchasePriceInput = $('#purchase_price');
+            var $priceInput = $('#price');
+            var $productNameInput = $('#product_name');
+            var $productCodeInput = $('#product_code');
+
+            $purchasePriceInput.on('input', function () {
+                var purchasePrice = parseFloat($purchasePriceInput.val());
+
+                if (!isNaN(purchasePrice)) {
+                    var calculatedPrice = purchasePrice * 1.25;
+                    $priceInput.val(calculatedPrice.toFixed(2));
+                }
+            });
+
+
+            function generateProductCode() {
+
+                var productName = $productNameInput.val();
+
+
+                if (productName.length >= 3) {
+
+                    var prefix = productName.substring(0, 3).toUpperCase();
+
+
+                    var randomDigits = Math.floor(10000 + Math.random() * 90000);
+
+                    var generatedProductCode = prefix + randomDigits;
+
+                    $productCodeInput.val(generatedProductCode);
+                }
+            }
+
+            $productNameInput.on('input', function () {
+                generateProductCode();
+            });
+        });
+    </script>
 @endsection

@@ -2,14 +2,14 @@
 @section('content')
 @can('sales_create')
     <div class="block my-4">
-        <a class="btn-md btn-green" href="{{ route('admin.sales.create') }}">
-            {{ trans('global.add') }} {{ trans('cruds.sale.title_singular') }}
+        <a class="btn-md btn-green" href="{{ route('admin.units.create') }}">
+            {{ trans('global.add') }} {{ trans('cruds.unit.title_singular') }}
         </a>
     </div>
 @endcan
 <div class="main-card">
     <div class="header">
-        {{ trans('cruds.sale.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.unit.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="body">
@@ -21,74 +21,51 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.sale.fields.id') }}
+                            {{ trans('cruds.unit.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.sale.fields.sale_date') }}
+                            {{ trans('cruds.unit.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.sale.fields.transaction_code') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.sale.fields.grand_total') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.sale.fields.amount_paid') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.sale.fields.change_due') }}
+                            {{ trans('cruds.unit.fields.description') }}
                         </th>
 
-                        <th>
-                            {{ trans('cruds.sale.fields.user') }}
-                        </th>
                         <th>
                             &nbsp;
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($sales as $key => $sale)
-                        <tr data-entry-id="{{ $sale->id }}">
+                    @foreach($units as $key => $unit)
+                        <tr data-entry-id="{{ $unit->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $sale->id ?? '' }}
+                                {{ $unit->id ?? '' }}
                             </td>
                             <td>
-                                {{ $sale->sale_date ?? '' }}
+                                {{ $unit->name ?? '' }}
                             </td>
                             <td>
-                                {{ $sale->transaction_code ?? '' }}
+                                {{ $unit->description ?? '' }}
                             </td>
+
                             <td>
-                                {{ $sale->grand_total ?? '' }}
-                            </td>
-                            <td>
-                                {{ $sale->amount_paid ?? '' }}
-                            </td>
-                            <td>
-                                {{ $sale->change_due ?? '' }}
-                            </td>
-                            <td>
-                                {{ $sale->user->name ?? '' }}
-                            </td>
-                            <td>
-                                @can('sales_show')
-                                    <a class="btn-sm btn-indigo" href="{{ route('admin.sales.show', $sale->id) }}">
+                                @can('units_show')
+                                    <a class="btn-sm btn-indigo" href="{{ route('admin.units.show', $unit->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('sales_edit')
-                                    <a class="btn-sm btn-blue" href="{{ route('admin.sales.edit', $sale->id) }}">
+                                @can('units_edit')
+                                    <a class="btn-sm btn-blue" href="{{ route('admin.units.edit', $unit->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('sales_delete')
-                                    <form action="{{ route('admin.sales.destroy', $sale->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('units_delete')
+                                    <form action="{{ route('admin.units.destroy', $unit->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn-sm btn-red" value="{{ trans('global.delete') }}">
@@ -110,11 +87,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('products_delete')
+@can('units_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.products.massDestroy') }}",
+    url: "{{ route('admin.units.massDestroy') }}",
     className: 'btn-red',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
