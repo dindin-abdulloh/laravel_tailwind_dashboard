@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 @section('content')
     @php
@@ -89,48 +88,56 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full mb-3">
-                <button type="button" id="addProduct" class="submit-button">Tambah Produk</button>
+            <div class="w-full mb-3" style="margin-bottom: 1rem;">
+                <button type="button" id="addProduct" class="submit-button" style="background-color: #4CAF50; /* Green */
+                    border: none;
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    transition-duration: 0.4s;
+                    cursor: pointer;
+                    border-radius: 4px;">Tambah Produk</button>
             </div>
         </div>
 
-        <div class="w-full mb-3">
-            <button type="button" id="addProduct" class="submit-button">Tambah Produk</button>
-        </div>
-
-        <div class="container flex flex-wrap">
+        <div class="container flex flex-wrap" style="padding: 1rem;">
             <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-3 md:pr-2 lg:pr-2 xl:pr-2">
                 <div class="w-full">
-                    <h2>Data Produk Terjual</h2>
-                    <table>
+                    <h2 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">Data Produk</h2>
+                    <table style="width: 100%; border-collapse: collapse; border: 1px solid #000;">
                         <thead>
                             <tr>
-                                <th>Produk</th>
-                                <th>Kuantitas</th>
-                                <th>Harga Satuan</th>
-                                <th>Diskon</th>
-                                <th>Total</th>
+                                <th style="padding: 0.5rem; border-bottom: 1px solid #000;">Produk</th>
+                                <th style="padding: 0.5rem; border-bottom: 1px solid #000;">Kuantitas</th>
+                                <th style="padding: 0.5rem; border-bottom: 1px solid #000;">Harga Satuan</th>
+                                <th style="padding: 0.5rem; border-bottom: 1px solid #000;">Diskon</th>
+                                <th style="padding: 0.5rem; border-bottom: 1px solid #000;">Total</th>
                             </tr>
                         </thead>
                         <tbody id="soldProductsTableBody">
+
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="4" class="text-right">Grand Total:</td>
-                                <td id="grandTotal">0</td>
+                                <td colspan="4" style="padding: 0.5rem; text-align: right; font-weight: bold;">Grand Total:</td>
+                                <td id="grandTotal" style="padding: 0.5rem; font-weight: bold;">0</td>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
             </div>
 
-            <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-3 md:pl-2 lg:pl-2 xl:pl-2">
+            <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-3 md:pl-2 lg:pl-2 xl:pl-2" style="padding: 1rem;">
                 <div class="w-full">
-                    <label for="amount_paid" class="text-xs required">{{ trans('cruds.sale.fields.amount_paid') }}</label>
+                    <label for="amount_paid" class="text-xs">{{ trans('cruds.sale.fields.amount_paid') }}</label>
                     <div class="form-group">
                         <input type="number" id="amount_paid" name="amount_paid"
-                            class="{{ $errors->has('amount_paid') ? ' is-invalid' : '' }}" value="{{ old('amount_paid') }}"
-                            required>
+                            class="{{ $errors->has('amount_paid') ? ' is-invalid' : '' }}"
+                            value="{{ old('amount_paid') }}" required>
                     </div>
                     @if ($errors->has('amount_paid'))
                         <p class="invalid-feedback">{{ $errors->first('amount_paid') }}</p>
@@ -160,7 +167,8 @@
             <input type="hidden" name="amount_paid" id="amount_paid_input" value="">
             <input type="hidden" name="change_due" id="change_due_input" value="">
             <input type="hidden" name="sale_date" id="sale_date" value="{{ old('sale_date', date('Y-m-d')) }}">
-            <input type="hidden" name="transaction_code" id="transaction_code" value="{{ '#' . date('dHis') . rand(100, 999) }}">
+            <input type="hidden" name="transaction_code" id="transaction_code"
+                value="{{ '#' . date('dHis') . rand(100, 999) }}">
             <input type="hidden" name="grand_total" id="grand_total_input" value="0">
             <div class="footer">
                 <button type="submit" class="submit-button">{{ trans('global.save') }}</button>
@@ -208,36 +216,35 @@
             }
 
             $('#addProduct').click(function() {
-                // Ambil nilai dari input produk dan kuantitas
+
                 var productId = $('#product_id').val();
-                var productName = $('#product_id option:selected').text(); // Ambil nama produk
+                var productName = $('#product_id option:selected').text();
                 var quantity = $('#quantity').val();
                 var unitPrice = $('#unit_price').val();
                 var discount = $('#discount').val();
                 var totalAmount = $('#total_amount').val();
 
-                // Validasi input, tambahkan validasi sesuai kebutuhan
+
                 if (!productId || !quantity) {
                     alert('Produk dan kuantitas harus diisi.');
                     return;
                 }
 
-                // Tambahkan baris baru ke dalam tabel
+
                 addProductToTable(productId, productName, quantity, unitPrice, discount, totalAmount);
 
-                // Reset nilai input
+
                 resetInputFields();
 
-                // Perbarui total secara dinamis
+
                 updateGrandTotal();
             });
 
             // Simpan dan print
             $('#saveAndPrint').click(function() {
-                // Lakukan logika untuk menyimpan data ke database dan melakukan print
-                // ...
 
-                // Setelah penyimpanan, Anda dapat mengarahkan pengguna ke halaman lain atau menampilkan pesan sukses
+
+
                 alert('Data berhasil disimpan dan dicetak.');
             });
 
@@ -245,20 +252,40 @@
             var savedProducts = [];
 
             function addProductToTable(productId, productName, quantity, unitPrice, discount, totalAmount) {
-                // Tambahkan baris baru ke dalam tabel
 
-                rowTotals.push(parseFloat(totalAmount.replace(',', '')));
-                var newRow = '<tr>' +
-                    '<td>' + productName + '</td>' +
-                    '<td>' + quantity + '</td>' +
-                    '<td>' + unitPrice + '</td>' +
-                    '<td>' + discount + '</td>' +
-                    '<td>' + totalAmount + '</td>' +
-                    '<td><button type="button" class="btn btn-danger btn-sm deleteRow">Hapus</button></td>' +
-                    '</tr>';
+                var existingRow = $('#soldProductsTableBody tr').filter(function() {
+                    return $('td:first-child', this).text() == productName;
+                });
 
-                $('#soldProductsTableBody').append(newRow);
+                if (existingRow.length > 0) {
 
+                    var existingQuantity = parseInt($('td:nth-child(2)', existingRow).text());
+                    var newQuantity = existingQuantity + parseInt(quantity);
+                    $('td:nth-child(2)', existingRow).text(newQuantity);
+
+
+                    updateTotalAndQuantity(existingRow, newQuantity, unitPrice, discount, totalAmount);
+                } else {
+
+                    rowTotals.push(parseFloat(totalAmount.replace(',', '')));
+
+                    var newRow = `
+                        <tr style="border: 1px solid #000;">
+                            <td style="padding: 0.5rem;">${productName}</td>
+                            <td style="padding: 0.5rem;">${quantity}</td>
+                            <td style="padding: 0.5rem;">${unitPrice}</td>
+                            <td style="padding: 0.5rem;">${discount}</td>
+                            <td style="padding: 0.5rem;">${totalAmount}</td>
+                            <td style="padding: 0.5rem;">
+                                <button class="deleteButton" type="button" style="background-color: #e53e3e; color: #fff; padding: 0.5rem 1rem; border-radius: 0.25rem;">
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+
+                    $('#soldProductsTableBody').append(newRow);
+                }
                 var productData = {
                     product_id: productId,
                     quantity: quantity,
@@ -273,31 +300,46 @@
                 resetInputFields()
             }
 
+            function updateTotalAndQuantity(row, newQuantity, unitPrice, discount, totalAmount) {
+
+                $('td:nth-child(2)', row).text(newQuantity);
+
+
+                var newTotalAmount = parseFloat(totalAmount.replace(',', ''));
+                var newDiscount = (newQuantity >= 10) ? 0.02 * newTotalAmount : 0;
+
+                $('td:nth-child(4)', row).text(newDiscount.toFixed(2));
+
+
+                rowTotals[row.index()] = newTotalAmount - newDiscount;
+                updateGrandTotal();
+            }
+
             function resetInputFields() {
-                // Reset nilai input
+
                 $('#product_id').val('');
                 $('#quantity').val('');
                 $('#unit_price').val('');
                 $('#discount').val('');
                 $('#total_amount').val('');
             }
-            $(document).on('click', '.deleteRow', function() {
-                // Hapus baris saat tombol hapus diklik
-                var deletedRow = $(this).closest('tr');
-                var deletedTotal = parseFloat(deletedRow.find('td:last').text().replace(',', ''));
+             $(document).on('click', '.deleteButton', function() {
 
-                // Hapus total baris dari array
-                var index = deletedRow.index();
-                if (index !== -1) {
-                    rowTotals.splice(index, 1);
-                }
+        var deletedRow = $(this).closest('tr');
+        var deletedTotal = parseFloat(deletedRow.find('td:last').text().replace(',', ''));
 
-                // Hapus baris dari tabel
-                deletedRow.remove();
 
-                // Perbarui total secara dinamis
-                updateGrandTotal();
-            });
+        var index = deletedRow.index();
+        if (index !== -1) {
+            rowTotals.splice(index, 1);
+        }
+
+
+        deletedRow.remove();
+
+
+        updateGrandTotal();
+    });
 
             function updateGrandTotal() {
                 var grandTotal = rowTotals.reduce(function(total, value) {
@@ -310,7 +352,7 @@
             }
 
             function updateTableDataInput() {
-                // Simpan data tabel dalam input tersembunyi
+
                 $('#tableData').val(JSON.stringify(savedProducts));
             }
 
@@ -322,7 +364,7 @@
                 var amountPaid = $('#amount_paid').val();
                 var grandTotal = parseFloat($('#grandTotal').text());
 
-                // Periksa apakah nilai dapat di-parse menjadi angka
+
                 if (!isNaN(amountPaid)) {
                     var changeDue = parseFloat(amountPaid) - grandTotal;
                     $('#change_due').val(changeDue.toFixed(2));
@@ -332,13 +374,13 @@
             }
 
             function resetInputFields() {
-            // Reset nilai input
-            $('#product_id').val('').trigger('change'); // Trigger change untuk input yang menggunakan select2
-            $('#quantity').val('');
-            $('#unit_price').val('');
-            $('#discount').val('');
-            $('#total_amount').val('');
-        }
+
+                $('#product_id').val('').trigger('change');
+                $('#quantity').val('');
+                $('#unit_price').val('');
+                $('#discount').val('');
+                $('#total_amount').val('');
+            }
 
         });
     </script>

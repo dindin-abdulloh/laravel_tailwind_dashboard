@@ -161,8 +161,8 @@ return [
         ],
     ],
     'sale'         => [
-        'title'          => 'Penjualan',
-        'title_singular' => 'Penjualan',
+        'title'          => 'Transaksi',
+        'title_singular' => 'Transaksi',
         'fields'         => [
             'id'                => 'ID',
             'product_id'           => 'Nama Produk',

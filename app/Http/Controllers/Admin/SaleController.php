@@ -53,6 +53,8 @@ class SaleController extends Controller
             $soldProducts = json_decode($request->input('sold_product'), true);
 
             foreach ($soldProducts as $product) {
+
+                $this->decreaseProductQuantity($product['product_id'][0], $product['quantity']);
                 $sale->soldProducts()->create([
                     'product_id' => $product['product_id'][0],
                     'quantity' => $product['quantity'],
@@ -73,6 +75,16 @@ class SaleController extends Controller
         }
 
 
+    }
+
+    private function decreaseProductQuantity($productId, $quantity)
+    {
+        $product = Product::find($productId);
+
+        if ($product) {
+            $newQuantity = max(0, $product->stock_quantity - $quantity);
+            $product->update(['stock_quantity' => $newQuantity]);
+        }
     }
 
 }

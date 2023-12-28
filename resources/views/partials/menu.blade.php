@@ -50,7 +50,7 @@
         @endcan
         @can('units_access')
             <a class="nav-link{{ request()->is('admin/units*') ? ' active' : '' }}" href="{{ route('admin.units.index') }}">
-                <i class="fa fa-bars" aria-hidden="true"></i>
+                <i class="fa fa-archive" aria-hidden="true"></i>
 
                 <span class="mx-4">{{ trans('cruds.unit.title') }}</span>
             </a>
