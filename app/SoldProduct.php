@@ -34,9 +34,9 @@ class SoldProduct extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function product()
+    public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class, 'product_sold_product');
     }
 
     public function sale()

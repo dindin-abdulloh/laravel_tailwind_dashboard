@@ -45,6 +45,7 @@ return [
     'verifyYourEmail'                      => 'Please verify your email',
     'verifyYourUser'                       => 'To finish your registration - site asks you to verify your email',
     'view'                                 => 'View',
+    'print'                                => 'Print',
     'view_file'                            => 'View file',
     'year'                                 => 'Year',
     'yes'                                  => 'Yes',

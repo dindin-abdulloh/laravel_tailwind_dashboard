@@ -49,5 +49,15 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    // public function soldProducts()
+    // {
+    //     return $this->belongsToMany(SoldProduct::class);
+    // }
+
+    public function soldProducts()
+    {
+        return $this->belongsToMany(SoldProduct::class, 'product_sold_product');
+    }
+
 
 }

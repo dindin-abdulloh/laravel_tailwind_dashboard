@@ -1,5 +1,4 @@
 <?php
-
 Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
@@ -44,11 +43,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // sales
     Route::delete('sales/destroy', 'SaleController@massDestroy')->name('sales.massDestroy');
+    Route::get('sales/print', 'SaleController@massPrint')->name('sales.massPrint');
     Route::resource('sales', 'SaleController');
 
     // units
     Route::delete('units/destroy', 'UnitController@massDestroy')->name('units.massDestroy');
     Route::resource('units', 'UnitController');
+    // Route::resource('print', 'PDFController');
 
     // Folders
     Route::delete('folders/destroy', 'FoldersController@massDestroy')->name('folders.massDestroy');

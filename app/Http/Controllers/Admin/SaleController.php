@@ -11,6 +11,8 @@ use App\SoldProduct;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\StoreSalesRequest;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 
 class SaleController extends Controller
@@ -86,5 +88,45 @@ class SaleController extends Controller
             $product->update(['stock_quantity' => $newQuantity]);
         }
     }
+
+    public function show(Sale $sale)
+    {
+        abort_if(Gate::denies('sales_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $saleId = $sale->id;
+
+        $soldProducts = SoldProduct::where('sale_id', $saleId)->get();
+
+        $soldWithProduct = [];
+
+        foreach ($soldProducts as $soldProduct) {
+            $productId = $soldProduct->product_id; // Assuming 'product_id' is the foreign key in SoldProduct model
+
+            // Fetch the product details using the Product model
+            $product = Product::find($productId);
+
+            if ($product) {
+                // If the product is found, add it to the $data array
+                $soldWithProduct[] = [
+                    'product_id' => $product->id,
+                    'sold_product_id' => $soldProduct->id,
+                    'product_name' => $product->product_name,
+                    'quantity' => $soldProduct->quantity,
+                    'discount' =>  $soldProduct->discount,
+                    'unit_price' =>  $soldProduct->unit_price,
+                    'total_amount' =>  $soldProduct->total_amount,
+                    // 'sold_product' => $soldProduct,
+                    // 'product' => $product,
+                ];
+            }
+        }
+
+        // return response()->json($soldWithProduct);
+        $pdf = Pdf::loadView('admin.sales.print', compact('sale', 'soldWithProduct'));
+        return $pdf->stream();
+    }
+
+
+
 
 }

@@ -200,25 +200,29 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 47,
                 'title' => 'sales_edit',
             ],
-            // units
             [
                 'id'    => 48,
+                'title' => 'sales_print',
+            ],
+            // units
+            [
+                'id'    => 49,
                 'title' => 'units_access',
             ],
             [
-                'id'    => 49,
+                'id'    => 50,
                 'title' => 'units_create',
             ],
             [
-                'id'    => 50,
+                'id'    => 51,
                 'title' => 'units_delete',
             ],
             [
-                'id'    => 51,
+                'id'    => 52,
                 'title' => 'units_show',
             ],
             [
-                'id'    => 52,
+                'id'    => 53,
                 'title' => 'units_edit',
             ],
         ];
