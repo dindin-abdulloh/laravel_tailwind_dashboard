@@ -202,7 +202,7 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 48,
-                'title' => 'sales_print',
+                'title' => 'solds_assess',
             ],
             // units
             [
@@ -224,6 +224,23 @@ class PermissionsTableSeeder extends Seeder
             [
                 'id'    => 53,
                 'title' => 'units_edit',
+            ],
+
+            [
+                'id'    => 54,
+                'title' => 'solds_create',
+            ],
+            [
+                'id'    => 55,
+                'title' => 'solds_delete',
+            ],
+            [
+                'id'    => 56,
+                'title' => 'solds_edit',
+            ],
+            [
+                'id'    => 57,
+                'title' => 'solds_show',
             ],
         ];
 

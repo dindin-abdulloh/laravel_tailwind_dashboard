@@ -88,11 +88,11 @@
                                     @endcan
 
 
-                                    @can('sales_edit')
+                                    {{-- @can('sales_edit')
                                         <a class="btn-sm btn-blue" href="{{ route('admin.sales.edit', $sale->id) }}">
                                             {{ trans('global.edit') }}
                                         </a>
-                                    @endcan
+                                    @endcan --}}
 
                                     @can('sales_delete')
                                         <form action="{{ route('admin.sales.destroy', $sale->id) }}" method="POST"
