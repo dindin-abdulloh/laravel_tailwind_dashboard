@@ -21,7 +21,7 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.product.fields.id') }}
+                            {{ trans('cruds.product.fields.no') }}
                         </th>
                         <th>
                             {{ trans('cruds.product.fields.product_name') }}
@@ -39,6 +39,9 @@
                             {{ trans('cruds.product.fields.supplier') }}
                         </th>
                         <th>
+                            {{ trans('cruds.product.fields.expired_date') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -50,7 +53,7 @@
 
                             </td>
                             <td>
-                                {{ $product->id ?? '' }}
+                                {{ $key + 1 }}
                             </td>
                             <td>
                                 {{ $product->product_name ?? '' }}
@@ -59,13 +62,49 @@
                                 {{ $product->price ?? '' }}
                             </td>
                             <td>
-                                {{ $product->stock_quantity ?? '' }}
+                                @if($product->stock_quantity > 10)
+                                    <span style="color: green;">
+                                        <strong>{{ $product->stock_quantity }}</strong>
+                                    </span>
+                                @elseif($product->stock_quantity <= 10 && $product->stock_quantity > 5)
+                                    <span style="color: rgb(220, 154, 30);">
+                                        <strong>{{ $product->stock_quantity }}</strong>
+                                    </span>
+                                @else
+                                    <span style="color: red;">
+                                        <strong>{{ $product->stock_quantity }}</strong>
+                                    </span>
+                                @endif
                             </td>
                             <td>
                                 {{ $product->category->category_name ?? '' }}
                             </td>
                             <td>
                                 {{ $product->supplier->supplier_name ?? '' }}
+                            </td>
+                            <td>
+                                @if(isset($product->expired_date))
+                                    @php
+                                        $expiredDate = \Carbon\Carbon::createFromFormat('Y-m-d', $product->expired_date);
+                                        $daysRemaining = now()->diffInDays($expiredDate, false);
+                                    @endphp
+
+                                    @if($daysRemaining > 30)
+                                        <strong style="color: green;">
+                                            {{ $product->expired_date }}
+                                        </strong>
+                                    @elseif($daysRemaining <= 30 && $daysRemaining > 0)
+                                        <strong style="color: rgb(220, 154, 30);">
+                                            {{ $product->expired_date }}
+                                        </strong>
+                                    @else
+                                        <strong style="color: red;">
+                                            {{ $product->expired_date }}
+                                        </strong>
+                                    @endif
+                                @else
+                                    {{ $product->expired_date ?? '' }}
+                                @endif
                             </td>
                             <td>
                                 @can('products_show')

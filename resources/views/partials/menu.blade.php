@@ -3,7 +3,7 @@
 <div id="sidebar" class="sidebar-menu transform -translate-x-full ease-in">
     <div class="flex items-center justify-center mt-4">
         <div class="flex items-center">
-            <span class="text-white text-2xl mx-2 font-semibold">{{ trans('panel.site_title') }}</span>
+            <span class="text-white text-2xl mx-2 font-semibold">{{ Auth::user()->name }}</span>
         </div>
     </div>
     <nav class="mt-4">

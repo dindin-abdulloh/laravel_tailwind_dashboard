@@ -43,11 +43,7 @@
                             <td>
                                 {{ $category->category_name ?? '' }}
                             </td>
-                            {{-- <td>
-                                @foreach($category->users as $key => $item)
-                                    <span class="badge blue">{{ $item->name }}</span>
-                                @endforeach
-                            </td> --}}
+
                             <td>
                                 @can('categories_show')
                                     <a class="btn-sm btn-indigo" href="{{ route('admin.categories.show', $category->id) }}">

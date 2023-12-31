@@ -110,11 +110,13 @@ return [
         'title_singular' => 'Product',
         'fields'         => [
             'id'                => 'ID',
+            'no'                => 'No',
             'product_name'      => 'Nama Produk',
             'price'             => 'Harga Jual',
             'stock_quantity'    => 'Stok',
             'category'          => 'Kategori',
             'supplier'          => 'Supplier',
+            'status_stock'          => 'Status Stok',
             'purchase_price'    => 'Harga Beli',
             'product_code'      => 'Kode Produk',
             'expired_date'      => 'Tanggal Kadaluarsa',
