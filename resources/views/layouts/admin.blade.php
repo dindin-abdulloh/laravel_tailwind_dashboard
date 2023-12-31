@@ -23,39 +23,20 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     @yield('styles')
 </head>
-
+<style>
+    .is-header{
+        font-size: 32px;
+        font-weight: 700;
+    }
+</style>
 <body>
     <div class="flex h-screen bg-gray-200">
         @include('partials.menu')
 
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="main-header">
-                <span>TESTING</span>
-                {{-- <div class="flex items-center">
-                    <button id="sidebar-enable" class="sidebar-enable">
-                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </div>
+                <h1 class="is-header">APOTEK SASAK LEMAH</h1>
 
-                @if(count(config('panel.available_languages', [])) > 1)
-                    <div class="flex items-center">
-                        <div class="languages">
-                            <select onchange="window.location.href = $(this).val()">
-                                @foreach(config('panel.available_languages') as $langLocale => $langName)
-                                    <option
-                                        value="{{ url()->current() }}?change_language={{ $langLocale }}"
-                                        @if(strtoupper($langLocale) ==strtoupper(app()->getLocale())) selected @endif
-                                    >{{ strtoupper($langLocale) }} ({{ $langName }})</option>
-                                @endforeach
-                            </select>
-                            <div class="icon">
-                                <i class="fa fa-caret-down fill-current h-4 w-4" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                @endif --}}
             </header>
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
