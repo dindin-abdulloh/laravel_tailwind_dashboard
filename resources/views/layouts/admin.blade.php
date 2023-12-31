@@ -25,8 +25,12 @@
 </head>
 <style>
     .is-header{
-        font-size: 32px;
+        font-size: 28px;
         font-weight: 700;
+    }
+    .img-logo{
+        width: 90px;
+        height: 90px;
     }
 </style>
 <body>
@@ -35,7 +39,8 @@
 
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="main-header">
-                <h1 class="is-header">APOTEK SASAK LEMAH</h1>
+                <img class="img-logo" src="{{ asset('images/logo.png') }}" alt="">
+                <h2 class="is-header">APOTEK SASAK LEMAH</h2>
 
             </header>
 
