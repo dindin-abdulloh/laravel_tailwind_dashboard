@@ -120,6 +120,7 @@ return [
             'purchase_price'    => 'Harga Beli',
             'product_code'      => 'Kode Produk',
             'expired_date'      => 'Tanggal Kadaluarsa',
+            'unit_type'      => 'Jenis Satuan',
             'name_helper'       => '',
             'created_at'        => 'Created at',
             'created_at_helper' => '',

@@ -30,6 +30,9 @@
                             {{ trans('cruds.product.fields.price') }}
                         </th>
                         <th>
+                            {{ trans('cruds.product.fields.unit_type') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.product.fields.stock_quantity') }}
                         </th>
                         <th>
@@ -60,6 +63,9 @@
                             </td>
                             <td>
                                 {{ $product->price ?? '' }}
+                            </td>
+                            <td>
+                                {{ $product->unit->name ?? '' }}
                             </td>
                             <td>
                                 @if($product->stock_quantity > 10)

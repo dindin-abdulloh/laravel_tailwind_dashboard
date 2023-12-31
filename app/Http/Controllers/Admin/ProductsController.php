@@ -10,6 +10,7 @@ use App\Category;
 use App\Supplier;
 use App\User;
 use App\Product;
+use App\Unit;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -40,8 +41,9 @@ class ProductsController extends Controller
 
         $category = Category::all()->pluck('category_name', 'id');
         $supplier = Supplier::all()->pluck('supplier_name', 'id');
+        $unit = Unit::all()->pluck('name', 'id');
 
-        return view('admin.products.create', compact('category', 'supplier'));
+        return view('admin.products.create', compact('category', 'supplier', 'unit'));
     }
 
     public function store(StoreProductRequest $request)
@@ -57,8 +59,9 @@ class ProductsController extends Controller
 
         $category = Category::all()->pluck('category_name', 'id');
         $supplier = Supplier::all()->pluck('supplier_name', 'id');
+        $unit = Unit::all()->pluck('name', 'id');
 
-        return view('admin.products.edit', compact( 'product', 'category', 'supplier'));
+        return view('admin.products.edit', compact( 'product', 'category', 'supplier', 'unit'));
     }
 
     public function update(UpdateProductRequest $request, Product $product)

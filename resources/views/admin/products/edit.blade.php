@@ -53,6 +53,19 @@
                     @endif
                     <span class="block">{{ trans('cruds.product.fields.name_helper') }}</span>
                 </div>
+                <div class="mt-3 mx-2">
+                    <label for="unit_id" class="text-xs">{{ trans('cruds.product.fields.unit_type') }}</label>
+                    <select class="select2{{ $errors->has('unit_id') ? ' is-invalid' : '' }}" name="unit_id" id="unit_id" multiple>
+                        @foreach($unit as $id => $unt)
+                            <option value="{{ $id }}" {{ ($product->unit_id ? $product->unit_id : old('unit_id')) == $id ? 'selected' : '' }}>{{ $unt }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('category_id'))
+                        <p class="invalid-feedback">{{ $errors->first('category_id') }}</p>
+                    @endif
+                    <span class="block">{{ trans('cruds.product.fields.name_helper') }}</span>
+                </div>
+
             </div>
 
             <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-3 md:pl-2 lg:pl-2 xl:pl-2">

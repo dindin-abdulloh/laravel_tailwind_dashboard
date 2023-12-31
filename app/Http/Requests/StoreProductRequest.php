@@ -35,6 +35,10 @@ class StoreProductRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'unit_id' => [
+                'required',
+                'integer',
+            ],
             'price' => [
                 'required',
                 // 'integer',
