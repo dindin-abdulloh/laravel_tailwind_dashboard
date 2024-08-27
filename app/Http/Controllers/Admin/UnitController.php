@@ -18,6 +18,8 @@ class UnitController extends Controller
 
         $units = Unit::all();
 
+
+
         return view('admin.units.index', compact('units'));
     }
 
@@ -36,5 +38,14 @@ class UnitController extends Controller
         $units = Unit::create($request->all());
 
         return redirect()->route('admin.units.index');
+    }
+
+    public function edit(Unit $unit)
+    {
+        abort_if(Gate::denies('units_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+
+
+        return view('admin.units.edit', compact( 'unit'));
     }
 }

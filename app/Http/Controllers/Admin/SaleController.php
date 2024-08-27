@@ -34,38 +34,34 @@ class SaleController extends Controller
         abort_if(Gate::denies('sales_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $products = Product::all(['id', 'product_name', 'price']);
-
         return view('admin.sales.create', compact('products'));
     }
 
     public function store(StoreSalesRequest $request)
     {
-
         try {
             DB::beginTransaction();
 
             $sale = Sale::create([
-                'user_id' => $request->input('user_id'),
-                'amount_paid' => $request->input('amount_paid'),
-                'change_due' => $request->input('change_due'),
-                'sale_date' => $request->input('sale_date'),
-                'transaction_code' => $request->input('transaction_code'),
-                'grand_total' => $request->input('grand_total'),
-
+                'user_id' => $request->user_id,
+                'amount_paid' => $request->amount_paid,
+                'change_due' => $request->change_due,
+                'sale_date' => $request->sale_date,
+                'transaction_code' => $request->transaction_code,
+                'grand_total' => $request->grand_total,
             ]);
 
-            $soldProducts = json_decode($request->input('sold_product'), true);
+            $soldProducts = json_decode($request->sold_product, true);
 
             foreach ($soldProducts as $product) {
-
-                $this->decreaseProductQuantity($product['product_id'][0], $product['quantity']);
-                $sale->soldProducts()->create([
-                    'product_id' => $product['product_id'][0],
+                $this->decreaseProductQuantity($product['product_id'], $product['quantity']);
+                SoldProduct::create([
+                    'sale_id' => $sale->id,
+                    'product_id' => $product['product_id'],
                     'quantity' => $product['quantity'],
                     'unit_price' => $product['unit_price'],
                     'discount' => $product['discount'],
                     'total_amount' => $product['total_amount'],
-
                 ]);
             }
 
@@ -77,8 +73,6 @@ class SaleController extends Controller
 
             return redirect()->route('admin.sales.index')->with('error', 'Gagal menyimpan data.');
         }
-
-
     }
 
     private function decreaseProductQuantity($productId, $quantity)

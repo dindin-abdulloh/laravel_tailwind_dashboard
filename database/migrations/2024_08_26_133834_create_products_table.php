@@ -23,6 +23,8 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 10, 2);
             $table->decimal('purchase_price', 10, 2);
             $table->integer('stock_quantity');
+            $table->unsignedBigInteger('unit_id')->nullable();
+            $table->foreign('unit_id')->references('id')->on('units');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
